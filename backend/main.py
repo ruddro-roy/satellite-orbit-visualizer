@@ -20,7 +20,7 @@ from skyfield.api import EarthSatellite, load, wgs84
 TLE_SOURCE_URL = (
     "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle"
 )
-CACHE_TTL_MINUTES = 360  # refresh every 6 hours
+CACHE_TTL_MINUTES = 60  # refresh every 1 hour
 PREDICTION_WINDOW_HOURS = 36
 TIME_STEP_MINUTES = 1
 
