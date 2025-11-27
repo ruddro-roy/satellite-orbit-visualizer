@@ -7,100 +7,6 @@ import * as satellite from "satellite.js";
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8000";
 const EARTH_RADIUS_KM = 6371;
 
-const shellStyle = {
-  width: "100vw",
-  height: "100vh",
-  position: "relative",
-  background:
-    "radial-gradient(circle at 20% 20%, #112753 0%, #050b16 50%, #01040a 100%)",
-  fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-  color: "#f8fafc",
-};
-
-const hudStyle = {
-  position: "absolute",
-  top: "1.25rem",
-  left: "1.25rem",
-  width: "320px",
-  padding: "1rem 1.25rem",
-  borderRadius: "1rem",
-  background: "rgba(2, 6, 23, 0.78)",
-  backdropFilter: "blur(12px)",
-  border: "1px solid rgba(100, 116, 139, 0.25)",
-  boxShadow: "0 20px 45px rgba(2, 6, 23, 0.55)",
-  pointerEvents: "auto",
-};
-
-const hudHeading = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginBottom: "0.75rem",
-};
-
-const miniTextStyle = {
-  fontSize: "0.75rem",
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: "#94a3b8",
-  marginBottom: "0.15rem",
-};
-
-const valueStyle = {
-  fontSize: "1.1rem",
-  fontWeight: 600,
-  color: "#e2e8f0",
-};
-
-const passListStyle = {
-  maxHeight: "220px",
-  overflowY: "auto",
-  marginTop: "0.75rem",
-  paddingRight: "0.25rem",
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5rem",
-};
-
-const passRowStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gap: "0.5rem",
-  padding: "0.6rem",
-  borderRadius: "0.75rem",
-  background: "rgba(15, 23, 42, 0.75)",
-  border: "1px solid rgba(51, 65, 85, 0.6)",
-};
-
-const pillStyle = (tone = "neutral") => ({
-  padding: "0.35rem 0.7rem",
-  borderRadius: "999px",
-  fontSize: "0.75rem",
-  fontWeight: 600,
-  background:
-    tone === "positive"
-      ? "rgba(34, 197, 94, 0.25)"
-      : tone === "negative"
-      ? "rgba(239, 68, 68, 0.25)"
-      : "rgba(99, 102, 241, 0.25)",
-  color:
-    tone === "positive"
-      ? "#a7f3d0"
-      : tone === "negative"
-      ? "#fecaca"
-      : "#c7d2fe",
-});
-
-const statusBannerBase = {
-  position: "absolute",
-  top: "1.25rem",
-  right: "1.25rem",
-  padding: "0.75rem 1rem",
-  borderRadius: "0.9rem",
-  fontSize: "0.9rem",
-  boxShadow: "0 20px 45px rgba(2, 6, 23, 0.55)",
-  pointerEvents: "none",
-};
 
 const formatTime = (isoString) => {
   if (!isoString) return "--";
@@ -196,12 +102,13 @@ function SatelliteSwarm({ catalog, onSelect, selectedId }) {
     }
   }, [satRecords, selectedId, baseColor, highlightColor]);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!meshRef.current || satRecords.length === 0) {
       return;
     }
     const now = new Date();
     const gmst = satellite.gstime(now);
+    const camera = state.camera;
 
     satRecords.forEach((sat, idx) => {
       const propagation = satellite.propagate(sat.satrec, now);
@@ -215,6 +122,9 @@ function SatelliteSwarm({ catalog, onSelect, selectedId }) {
         positionEcf.z / EARTH_RADIUS_KM
       );
 
+      // Billboard effect: make circle face camera
+      dummy.lookAt(camera.position);
+      
       const scale = sat.satellite_number === selectedId ? 0.02 : 0.012;
       dummy.scale.setScalar(scale);
       dummy.updateMatrix();
@@ -251,12 +161,13 @@ function SatelliteSwarm({ catalog, onSelect, selectedId }) {
       onPointerDown={handlePointerDown}
       frustumCulled={false}
     >
-      <sphereGeometry args={[0.01, 6, 6]} />
+      <circleGeometry args={[0.015, 8]} />
       <meshStandardMaterial
         vertexColors
         emissive="#ffffff"
         emissiveIntensity={0.5}
         toneMapped={false}
+        side={THREE.DoubleSide}
       />
     </instancedMesh>
   );
@@ -264,77 +175,83 @@ function SatelliteSwarm({ catalog, onSelect, selectedId }) {
 
 function Hud({ catalogCount, selectedSat, passes, passState, observer }) {
   return (
-    <div style={hudStyle}>
-      <div style={hudHeading}>
+    <div className="absolute top-4 left-4 bg-black/50 text-white p-4 rounded-lg backdrop-blur-md border border-slate-500/25 shadow-2xl w-80 pointer-events-auto">
+      <div className="flex justify-between items-center mb-3">
         <div>
-          <div style={miniTextStyle}>Tracking catalog</div>
-          <div style={{ ...valueStyle, fontSize: "1.4rem" }}>
+          <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Tracking catalog</div>
+          <div className="text-2xl font-semibold text-slate-200">
             {catalogCount.toLocaleString()}
           </div>
         </div>
-        <div style={pillStyle(observer.source === "gps" ? "positive" : "neutral")}>
+        <div className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
+          observer.source === "gps" && observer.ready
+            ? "bg-green-500/25 text-green-200"
+            : "bg-indigo-500/25 text-indigo-200"
+        }`}>
           {observer.source === "gps" && observer.ready ? "GPS locked" : "Manual coords"}
         </div>
       </div>
 
-      <div style={{ marginBottom: "0.85rem" }}>
-        <div style={miniTextStyle}>Observer</div>
-        <div style={valueStyle}>
+      <div className="mb-3.5">
+        <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Observer</div>
+        <div className="text-lg font-semibold text-slate-200">
           {observer.lat.toFixed(2)}°, {observer.lon.toFixed(2)}°
         </div>
-        <div style={{ ...miniTextStyle, marginTop: "0.15rem" }}>
+        <div className="text-xs tracking-wider uppercase text-slate-400 mt-1">
           Alt {Math.round(observer.alt)} m · Reference frame UTC
         </div>
       </div>
 
-      <div style={{ marginBottom: "0.85rem" }}>
-        <div style={miniTextStyle}>Selection</div>
+      <div className="mb-3.5">
+        <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Selection</div>
         {selectedSat ? (
           <>
-            <div style={valueStyle}>{selectedSat.name}</div>
-            <div style={{ ...miniTextStyle, marginTop: "0.2rem" }}>
+            <div className="text-lg font-semibold text-slate-200">{selectedSat.name}</div>
+            <div className="text-xs tracking-wider uppercase text-slate-400 mt-1">
               NORAD #{selectedSat.satellite_number}
             </div>
           </>
         ) : (
-          <div style={miniTextStyle}>Click a satellite point to inspect passes.</div>
+          <div className="text-xs tracking-wider uppercase text-slate-400">
+            Click a satellite point to inspect passes.
+          </div>
         )}
       </div>
 
       <div>
-        <div style={miniTextStyle}>Next passes (36h)</div>
+        <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Next passes (36h)</div>
         {passState.loading && (
-          <div style={{ ...miniTextStyle, color: "#cbd5f5" }}>
+          <div className="text-xs tracking-wider uppercase text-indigo-200">
             Computing windows…
           </div>
         )}
         {passState.error && (
-          <div style={{ ...miniTextStyle, color: "#fecaca" }}>
+          <div className="text-xs tracking-wider uppercase text-red-200">
             {passState.error}
           </div>
         )}
         {!passState.loading && passes.length === 0 && selectedSat && !passState.error && (
-          <div style={{ ...miniTextStyle, color: "#cbd5f5" }}>
+          <div className="text-xs tracking-wider uppercase text-indigo-200">
             No visible passes in the next window.
           </div>
         )}
-        <div style={passListStyle}>
+        <div className="max-h-[220px] overflow-y-auto mt-3 pr-1 flex flex-col gap-2">
           {passes.map((passEvent) => (
-            <div style={passRowStyle} key={passEvent.rise_time}>
+            <div className="grid grid-cols-3 gap-2 p-2.5 rounded-xl bg-slate-900/75 border border-slate-700/60" key={passEvent.rise_time}>
               <div>
-                <div style={miniTextStyle}>Rise</div>
-                <div style={valueStyle}>{formatTime(passEvent.rise_time)}</div>
-                <div style={miniTextStyle}>{formatDegrees(passEvent.rise_azimuth_deg)} az</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Rise</div>
+                <div className="text-lg font-semibold text-slate-200">{formatTime(passEvent.rise_time)}</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400">{formatDegrees(passEvent.rise_azimuth_deg)} az</div>
               </div>
               <div>
-                <div style={miniTextStyle}>Peak</div>
-                <div style={valueStyle}>{Math.round(passEvent.max_altitude_deg)}°</div>
-                <div style={miniTextStyle}>{formatTime(passEvent.max_altitude_time)}</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Peak</div>
+                <div className="text-lg font-semibold text-slate-200">{Math.round(passEvent.max_altitude_deg)}°</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400">{formatTime(passEvent.max_altitude_time)}</div>
               </div>
               <div>
-                <div style={miniTextStyle}>Set</div>
-                <div style={valueStyle}>{formatTime(passEvent.set_time)}</div>
-                <div style={miniTextStyle}>{formatDegrees(passEvent.set_azimuth_deg)} az</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400 mb-1">Set</div>
+                <div className="text-lg font-semibold text-slate-200">{formatTime(passEvent.set_time)}</div>
+                <div className="text-xs tracking-wider uppercase text-slate-400">{formatDegrees(passEvent.set_azimuth_deg)} az</div>
               </div>
             </div>
           ))}
@@ -345,12 +262,12 @@ function Hud({ catalogCount, selectedSat, passes, passState, observer }) {
 }
 
 function StatusBanner({ message, tone }) {
-  const background =
-    tone === "error"
-      ? "rgba(239, 68, 68, 0.85)"
-      : "rgba(59, 130, 246, 0.65)";
   return (
-    <div style={{ ...statusBannerBase, background }}>
+    <div className={`absolute top-5 right-5 px-4 py-3 rounded-xl text-sm shadow-2xl pointer-events-none ${
+      tone === "error"
+        ? "bg-red-500/85 text-white"
+        : "bg-blue-500/65 text-white"
+    }`}>
       {message}
     </div>
   );
@@ -427,7 +344,7 @@ export default function App() {
   }, [selectedSat, observer.lat, observer.lon, observer.alt]);
 
   return (
-    <div style={shellStyle}>
+    <div className="w-screen h-screen relative bg-gradient-radial from-[#112753] via-[#050b16] to-[#01040a] font-sans text-slate-50">
       <Canvas
         camera={{ position: [0, 0, 4], fov: 55 }}
         gl={{ antialias: true }}
