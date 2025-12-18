@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+*.bsp
+.pytest_cache/
