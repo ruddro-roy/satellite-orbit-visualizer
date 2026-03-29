@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <radialGradient id="selBg" cx="60%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#112753;stop-opacity:1"/>
+      <stop offset="60%" style="stop-color:#050b16;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#01040a;stop-opacity:1"/>
+    </radialGradient>
+    <radialGradient id="selEarth" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#1a4a7a;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#0d2847;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#071a30;stop-opacity:1"/>
+    </radialGradient>
+    <filter id="selGlow">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="480" height="360" fill="url(#selBg)"/>
+
+  <!-- Stars -->
+  <g fill="#e2e8f0">
+    <circle cx="30" cy="20" r="0.5" opacity="0.4"/><circle cx="90" cy="45" r="0.7" opacity="0.5"/>
+    <circle cx="160" cy="15" r="0.4" opacity="0.3"/><circle cx="250" cy="30" r="0.6" opacity="0.4"/>
+    <circle cx="350" cy="18" r="0.5" opacity="0.5"/><circle cx="420" cy="40" r="0.7" opacity="0.3"/>
+    <circle cx="460" cy="15" r="0.4" opacity="0.4"/><circle cx="70" cy="330" r="0.5" opacity="0.3"/>
+    <circle cx="400" cy="340" r="0.6" opacity="0.4"/>
+  </g>
+
+  <!-- Earth (partial, right side) -->
+  <circle cx="340" cy="200" r="160" fill="url(#selEarth)"/>
+  <g opacity="0.1" fill="none" stroke="#60a5fa" stroke-width="0.8">
+    <ellipse cx="340" cy="200" rx="160" ry="60"/>
+    <ellipse cx="340" cy="200" rx="160" ry="120"/>
+    <line x1="340" y1="40" x2="340" y2="360"/>
+    <line x1="180" y1="200" x2="500" y2="200"/>
+  </g>
+
+  <!-- Satellite dots around Earth -->
+  <g filter="url(#selGlow)">
+    <circle cx="200" cy="100" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="230" cy="80" r="1.8" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="280" cy="55" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="350" cy="50" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="410" cy="65" r="1.5" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="450" cy="100" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="470" cy="150" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="475" cy="220" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="460" cy="290" r="1.5" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="420" cy="330" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="350" cy="350" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="270" cy="345" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="210" cy="310" r="1.5" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="185" cy="250" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="185" cy="170" r="1.5" fill="#f8fafc" opacity="0.4"/>
+
+    <!-- Selected satellite (orange) -->
+    <circle cx="295" cy="115" r="6" fill="#f97316" opacity="0.25"/>
+    <circle cx="295" cy="115" r="4" fill="#f97316"/>
+  </g>
+
+  <!-- Selection detail panel -->
+  <g>
+    <rect x="16" y="16" width="200" height="158" rx="10" fill="#000000" opacity="0.55"/>
+    <rect x="16" y="16" width="200" height="158" rx="10" fill="none" stroke="#475569" stroke-width="0.5" opacity="0.25"/>
+
+    <text x="32" y="40" fill="#94a3b8" font-size="8" letter-spacing="2" font-weight="600">SELECTION</text>
+    <text x="32" y="60" fill="#e2e8f0" font-size="16" font-weight="700">ISS (ZARYA)</text>
+    <text x="32" y="76" fill="#64748b" font-size="8" letter-spacing="1">NORAD #25544</text>
+
+    <line x1="32" y1="86" x2="200" y2="86" stroke="#334155" stroke-width="0.5"/>
+
+    <text x="32" y="104" fill="#94a3b8" font-size="8" letter-spacing="2" font-weight="600">NEXT PASS</text>
+
+    <!-- Mini pass row -->
+    <text x="32" y="122" fill="#64748b" font-size="7" letter-spacing="1">RISE</text>
+    <text x="32" y="138" fill="#e2e8f0" font-size="13" font-weight="700">06:42</text>
+    <text x="32" y="150" fill="#64748b" font-size="7">312° az</text>
+
+    <text x="100" y="122" fill="#64748b" font-size="7" letter-spacing="1">PEAK</text>
+    <text x="100" y="138" fill="#e2e8f0" font-size="13" font-weight="700">71°</text>
+    <text x="100" y="150" fill="#64748b" font-size="7">06:46</text>
+
+    <text x="160" y="122" fill="#64748b" font-size="7" letter-spacing="1">SET</text>
+    <text x="160" y="138" fill="#e2e8f0" font-size="13" font-weight="700">06:51</text>
+    <text x="160" y="150" fill="#64748b" font-size="7">132° az</text>
+  </g>
+
+  <!-- Connection line from selected sat to panel -->
+  <line x1="216" y1="115" x2="295" y2="115" stroke="#f97316" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.4"/>
+</svg>

@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <radialGradient id="screenBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#112753;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#050b16;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#01040a;stop-opacity:1"/>
+    </radialGradient>
+    <radialGradient id="earth2" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#1e4d7a;stop-opacity:1"/>
+      <stop offset="40%" style="stop-color:#153d60;stop-opacity:1"/>
+      <stop offset="70%" style="stop-color:#0d2a48;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#071a30;stop-opacity:1"/>
+    </radialGradient>
+    <radialGradient id="earthAtmo" cx="35%" cy="35%" r="55%">
+      <stop offset="85%" style="stop-color:#1a3f6f;stop-opacity:0"/>
+      <stop offset="95%" style="stop-color:#2563eb;stop-opacity:0.08"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
+    </radialGradient>
+    <filter id="screenGlow2">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="earthClip2"><circle cx="620" cy="360" r="220"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#screenBg)"/>
+
+  <!-- Stars field -->
+  <g fill="#e2e8f0">
+    <circle cx="45" cy="25" r="0.7" opacity="0.5"/><circle cx="110" cy="60" r="0.4" opacity="0.3"/>
+    <circle cx="195" cy="18" r="0.6" opacity="0.4"/><circle cx="280" cy="75" r="0.8" opacity="0.6"/>
+    <circle cx="340" cy="35" r="0.5" opacity="0.3"/><circle cx="430" cy="95" r="0.7" opacity="0.5"/>
+    <circle cx="520" cy="28" r="0.4" opacity="0.4"/><circle cx="580" cy="70" r="0.6" opacity="0.3"/>
+    <circle cx="700" cy="42" r="0.8" opacity="0.5"/><circle cx="790" cy="55" r="0.5" opacity="0.4"/>
+    <circle cx="860" cy="22" r="0.7" opacity="0.6"/><circle cx="940" cy="68" r="0.4" opacity="0.3"/>
+    <circle cx="1020" cy="40" r="0.6" opacity="0.5"/><circle cx="1095" cy="80" r="0.8" opacity="0.4"/>
+    <circle cx="1150" cy="30" r="0.5" opacity="0.3"/><circle cx="70" cy="620" r="0.6" opacity="0.4"/>
+    <circle cx="160" cy="640" r="0.4" opacity="0.3"/><circle cx="900" cy="600" r="0.7" opacity="0.5"/>
+    <circle cx="1000" cy="640" r="0.5" opacity="0.3"/><circle cx="1100" cy="615" r="0.6" opacity="0.4"/>
+    <circle cx="150" cy="400" r="0.5" opacity="0.3"/><circle cx="80" cy="300" r="0.6" opacity="0.4"/>
+    <circle cx="1050" cy="300" r="0.7" opacity="0.5"/><circle cx="1130" cy="400" r="0.4" opacity="0.3"/>
+    <circle cx="980" cy="200" r="0.6" opacity="0.4"/><circle cx="1100" cy="150" r="0.5" opacity="0.3"/>
+    <circle cx="200" cy="500" r="0.7" opacity="0.5"/><circle cx="320" cy="550" r="0.4" opacity="0.3"/>
+    <circle cx="1060" cy="500" r="0.6" opacity="0.4"/><circle cx="950" cy="450" r="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- Earth -->
+  <circle cx="620" cy="360" r="225" fill="#071a30" opacity="0.3"/>
+  <circle cx="620" cy="360" r="220" fill="url(#earth2)"/>
+  <circle cx="620" cy="360" r="220" fill="url(#earthAtmo)"/>
+
+  <!-- Continent shapes (simplified, dark) -->
+  <g clip-path="url(#earthClip2)" opacity="0.12" fill="none" stroke="#60a5fa" stroke-width="1">
+    <!-- Grid -->
+    <ellipse cx="620" cy="360" rx="220" ry="80"/>
+    <ellipse cx="620" cy="360" rx="220" ry="150"/>
+    <ellipse cx="620" cy="360" rx="220" ry="200"/>
+    <line x1="620" y1="140" x2="620" y2="580"/>
+    <line x1="400" y1="360" x2="840" y2="360"/>
+    <ellipse cx="620" cy="360" rx="80" ry="220" transform="rotate(0 620 360)"/>
+    <!-- Land masses approximation -->
+    <path d="M530,200 Q540,230 525,260 Q515,290 530,320 Q540,340 525,370 Q510,400 530,430 Q540,460 530,490" stroke-width="1.5" opacity="1.5"/>
+    <path d="M650,180 Q660,210 670,240 Q675,260 665,280 Q660,300 670,320 Q680,350 665,380 Q655,420 670,460 Q680,490 665,520" stroke-width="1.5" opacity="1.5"/>
+    <path d="M700,175 Q730,195 745,220 Q755,245 740,265 Q730,280 745,300 Q760,315 750,340" stroke-width="1.5" opacity="1.5"/>
+  </g>
+
+  <!-- Satellite dots (the swarm) -->
+  <g filter="url(#screenGlow2)">
+    <!-- Outer orbit satellites -->
+    <circle cx="380" cy="200" r="2.5" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="420" cy="170" r="2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="470" cy="155" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="510" cy="148" r="2" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="560" cy="143" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="680" cy="140" r="2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="730" cy="148" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="780" cy="165" r="2.2" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="830" cy="195" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="860" cy="230" r="2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="870" cy="280" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="865" cy="340" r="2" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="850" cy="400" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="820" cy="450" r="2.2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="775" cy="490" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="720" cy="520" r="2" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="660" cy="540" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="580" cy="545" r="2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="520" cy="535" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="460" cy="510" r="2.2" fill="#f8fafc" opacity="0.7"/>
+    <circle cx="410" cy="470" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="380" cy="420" r="2" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="365" cy="360" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="370" cy="290" r="2" fill="#f8fafc" opacity="0.7"/>
+
+    <!-- LEO satellites closer -->
+    <circle cx="450" cy="250" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="490" cy="220" r="1.8" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="550" cy="200" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="690" cy="200" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="740" cy="220" r="1.5" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="790" cy="260" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="800" cy="320" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="790" cy="390" r="1.8" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="750" cy="440" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="690" cy="480" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="610" cy="500" r="1.5" fill="#f8fafc" opacity="0.4"/>
+    <circle cx="540" cy="490" r="1.8" fill="#f8fafc" opacity="0.6"/>
+    <circle cx="480" cy="460" r="1.5" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="440" cy="410" r="1.8" fill="#f8fafc" opacity="0.5"/>
+    <circle cx="420" cy="340" r="1.5" fill="#f8fafc" opacity="0.4"/>
+
+    <!-- Selected satellite (orange, larger) -->
+    <circle cx="615" cy="215" r="5" fill="#f97316" opacity="0.3"/>
+    <circle cx="615" cy="215" r="3.5" fill="#f97316"/>
+  </g>
+
+  <!-- HUD Panel -->
+  <g>
+    <rect x="28" y="28" width="300" height="440" rx="12" fill="#000000" opacity="0.5"/>
+    <rect x="28" y="28" width="300" height="440" rx="12" fill="none" stroke="#475569" stroke-width="0.5" opacity="0.25"/>
+
+    <!-- Catalog count -->
+    <text x="48" y="62" fill="#94a3b8" font-size="9" letter-spacing="2" font-weight="600">TRACKING CATALOG</text>
+    <text x="48" y="88" fill="#e2e8f0" font-size="26" font-weight="700">1,247</text>
+    <rect x="240" y="48" width="72" height="24" rx="12" fill="#22c55e" opacity="0.15"/>
+    <text x="276" y="64" text-anchor="middle" fill="#86efac" font-size="9" font-weight="600">GPS locked</text>
+
+    <!-- Observer -->
+    <text x="48" y="120" fill="#94a3b8" font-size="9" letter-spacing="2" font-weight="600">OBSERVER</text>
+    <text x="48" y="144" fill="#e2e8f0" font-size="18" font-weight="700">40.71°, -74.01°</text>
+    <text x="48" y="162" fill="#64748b" font-size="9" letter-spacing="1">ALT 10 M · REFERENCE FRAME UTC</text>
+
+    <!-- Selection -->
+    <text x="48" y="194" fill="#94a3b8" font-size="9" letter-spacing="2" font-weight="600">SELECTION</text>
+    <text x="48" y="218" fill="#e2e8f0" font-size="18" font-weight="700">ISS (ZARYA)</text>
+    <text x="48" y="236" fill="#64748b" font-size="9" letter-spacing="1">NORAD #25544</text>
+
+    <!-- Passes -->
+    <text x="48" y="268" fill="#94a3b8" font-size="9" letter-spacing="2" font-weight="600">NEXT PASSES (36H)</text>
+
+    <!-- Pass 1 -->
+    <rect x="42" y="280" width="272" height="52" rx="8" fill="#0f172a" opacity="0.75" stroke="#334155" stroke-width="0.5"/>
+    <text x="62" y="296" fill="#94a3b8" font-size="8" letter-spacing="1">RISE</text>
+    <text x="62" y="316" fill="#e2e8f0" font-size="16" font-weight="700">06:42</text>
+    <text x="62" y="328" fill="#64748b" font-size="8">312° az</text>
+    <text x="155" y="296" fill="#94a3b8" font-size="8" letter-spacing="1">PEAK</text>
+    <text x="155" y="316" fill="#e2e8f0" font-size="16" font-weight="700">71°</text>
+    <text x="155" y="328" fill="#64748b" font-size="8">06:46</text>
+    <text x="248" y="296" fill="#94a3b8" font-size="8" letter-spacing="1">SET</text>
+    <text x="248" y="316" fill="#e2e8f0" font-size="16" font-weight="700">06:51</text>
+    <text x="248" y="328" fill="#64748b" font-size="8">132° az</text>
+
+    <!-- Pass 2 -->
+    <rect x="42" y="340" width="272" height="52" rx="8" fill="#0f172a" opacity="0.75" stroke="#334155" stroke-width="0.5"/>
+    <text x="62" y="356" fill="#94a3b8" font-size="8" letter-spacing="1">RISE</text>
+    <text x="62" y="376" fill="#e2e8f0" font-size="16" font-weight="700">08:18</text>
+    <text x="62" y="388" fill="#64748b" font-size="8">245° az</text>
+    <text x="155" y="356" fill="#94a3b8" font-size="8" letter-spacing="1">PEAK</text>
+    <text x="155" y="376" fill="#e2e8f0" font-size="16" font-weight="700">34°</text>
+    <text x="155" y="388" fill="#64748b" font-size="8">08:22</text>
+    <text x="248" y="356" fill="#94a3b8" font-size="8" letter-spacing="1">SET</text>
+    <text x="248" y="376" fill="#e2e8f0" font-size="16" font-weight="700">08:25</text>
+    <text x="248" y="388" fill="#64748b" font-size="8">158° az</text>
+
+    <!-- Pass 3 -->
+    <rect x="42" y="400" width="272" height="52" rx="8" fill="#0f172a" opacity="0.75" stroke="#334155" stroke-width="0.5"/>
+    <text x="62" y="416" fill="#94a3b8" font-size="8" letter-spacing="1">RISE</text>
+    <text x="62" y="436" fill="#e2e8f0" font-size="16" font-weight="700">19:55</text>
+    <text x="62" y="448" fill="#64748b" font-size="8">198° az</text>
+    <text x="155" y="416" fill="#94a3b8" font-size="8" letter-spacing="1">PEAK</text>
+    <text x="155" y="436" fill="#e2e8f0" font-size="16" font-weight="700">48°</text>
+    <text x="155" y="448" fill="#64748b" font-size="8">19:59</text>
+    <text x="248" y="416" fill="#94a3b8" font-size="8" letter-spacing="1">SET</text>
+    <text x="248" y="436" fill="#e2e8f0" font-size="16" font-weight="700">20:04</text>
+    <text x="248" y="448" fill="#64748b" font-size="8">72° az</text>
+  </g>
+
+  <!-- Loading banner (top right, subtle) -->
+  <rect x="1050" y="28" width="125" height="32" rx="8" fill="#3b82f6" opacity="0.55"/>
+  <text x="1112" y="49" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="500">1,247 tracked</text>
+</svg>

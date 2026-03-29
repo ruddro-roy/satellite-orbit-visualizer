@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020617;stop-opacity:1"/>
+      <stop offset="40%" style="stop-color:#0a1628;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#0c1a30;stop-opacity:1"/>
+    </linearGradient>
+    <radialGradient id="earthGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:0.8"/>
+      <stop offset="50%" style="stop-color:#0f2844;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#020617;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="earthSurface" cx="40%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#1a4a7a;stop-opacity:1"/>
+      <stop offset="30%" style="stop-color:#143d66;stop-opacity:1"/>
+      <stop offset="60%" style="stop-color:#0d2847;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#081b33;stop-opacity:1"/>
+    </radialGradient>
+    <linearGradient id="orbit1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="orbit2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f97316;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#f97316;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="orbit3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0"/>
+      <stop offset="50%" style="stop-color:#22c55e;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="heroGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <clipPath id="earthClip">
+      <circle cx="820" cy="200" r="140"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#heroBg)"/>
+
+  <!-- Stars -->
+  <g fill="#e2e8f0">
+    <circle cx="50" cy="30" r="0.8" opacity="0.6"/><circle cx="120" cy="70" r="0.5" opacity="0.4"/>
+    <circle cx="200" cy="20" r="0.7" opacity="0.5"/><circle cx="300" cy="90" r="0.6" opacity="0.3"/>
+    <circle cx="380" cy="40" r="0.9" opacity="0.7"/><circle cx="450" cy="110" r="0.4" opacity="0.3"/>
+    <circle cx="530" cy="25" r="0.6" opacity="0.5"/><circle cx="610" cy="80" r="0.8" opacity="0.4"/>
+    <circle cx="700" cy="35" r="0.5" opacity="0.6"/><circle cx="780" cy="65" r="0.7" opacity="0.3"/>
+    <circle cx="870" cy="15" r="0.6" opacity="0.5"/><circle cx="950" cy="55" r="0.9" opacity="0.7"/>
+    <circle cx="1020" cy="30" r="0.4" opacity="0.4"/><circle cx="1100" cy="75" r="0.7" opacity="0.5"/>
+    <circle cx="1150" cy="20" r="0.5" opacity="0.3"/><circle cx="80" cy="300" r="0.6" opacity="0.4"/>
+    <circle cx="160" cy="350" r="0.8" opacity="0.5"/><circle cx="250" cy="320" r="0.5" opacity="0.3"/>
+    <circle cx="340" cy="370" r="0.7" opacity="0.6"/><circle cx="430" cy="340" r="0.4" opacity="0.3"/>
+    <circle cx="1050" cy="300" r="0.6" opacity="0.5"/><circle cx="1130" cy="350" r="0.8" opacity="0.4"/>
+    <circle cx="990" cy="330" r="0.5" opacity="0.3"/><circle cx="1080" cy="370" r="0.7" opacity="0.6"/>
+    <circle cx="60" cy="180" r="0.5" opacity="0.4"/><circle cx="140" cy="220" r="0.7" opacity="0.3"/>
+    <circle cx="940" cy="180" r="0.6" opacity="0.5"/><circle cx="1160" cy="250" r="0.4" opacity="0.4"/>
+    <circle cx="1000" cy="120" r="0.8" opacity="0.6"/><circle cx="1100" cy="160" r="0.5" opacity="0.3"/>
+  </g>
+
+  <!-- Earth glow -->
+  <circle cx="820" cy="200" r="200" fill="url(#earthGlow)"/>
+
+  <!-- Earth -->
+  <circle cx="820" cy="200" r="140" fill="url(#earthSurface)" stroke="#1e3a5f" stroke-width="0.5"/>
+
+  <!-- Continent outlines (simplified) -->
+  <g clip-path="url(#earthClip)" opacity="0.15" fill="none" stroke="#60a5fa" stroke-width="0.8">
+    <!-- Americas approximation -->
+    <path d="M760,110 Q765,130 755,150 Q750,170 760,190 Q765,200 755,220 Q748,240 760,260 Q770,280 765,300"/>
+    <!-- Europe/Africa approximation -->
+    <path d="M830,100 Q835,120 840,140 Q842,160 838,180 Q835,200 840,220 Q845,250 835,280 Q830,300 840,320"/>
+    <!-- Asia approximation -->
+    <path d="M860,95 Q880,110 890,130 Q895,150 885,165 Q880,175 890,190 Q900,200 895,220"/>
+    <!-- Grid lines -->
+    <ellipse cx="820" cy="200" rx="140" ry="60" opacity="0.5"/>
+    <ellipse cx="820" cy="200" rx="140" ry="100" opacity="0.4"/>
+    <ellipse cx="820" cy="200" rx="140" ry="130" opacity="0.3"/>
+    <line x1="820" y1="60" x2="820" y2="340" opacity="0.4"/>
+    <line x1="680" y1="200" x2="960" y2="200" opacity="0.4"/>
+  </g>
+
+  <!-- Orbit rings -->
+  <ellipse cx="820" cy="200" rx="175" ry="55" fill="none" stroke="url(#orbit1)" stroke-width="1" transform="rotate(-20 820 200)"/>
+  <ellipse cx="820" cy="200" rx="185" ry="70" fill="none" stroke="url(#orbit2)" stroke-width="0.8" transform="rotate(25 820 200)"/>
+  <ellipse cx="820" cy="200" rx="195" ry="50" fill="none" stroke="url(#orbit3)" stroke-width="0.8" transform="rotate(-50 820 200)"/>
+
+  <!-- Satellite dots on orbits -->
+  <g filter="url(#heroGlow)">
+    <circle cx="680" cy="155" r="3" fill="#3b82f6"/><circle cx="680" cy="155" r="6" fill="#3b82f6" opacity="0.3"/>
+    <circle cx="940" cy="155" r="3" fill="#f97316"/><circle cx="940" cy="155" r="6" fill="#f97316" opacity="0.3"/>
+    <circle cx="750" cy="100" r="2.5" fill="#22c55e"/><circle cx="750" cy="100" r="5" fill="#22c55e" opacity="0.3"/>
+    <circle cx="900" cy="290" r="2" fill="#60a5fa" opacity="0.8"/>
+    <circle cx="720" cy="280" r="2" fill="#60a5fa" opacity="0.6"/>
+    <circle cx="870" cy="100" r="1.8" fill="#f97316" opacity="0.7"/>
+    <circle cx="960" cy="220" r="1.5" fill="#22c55e" opacity="0.6"/>
+    <circle cx="690" cy="230" r="1.8" fill="#60a5fa" opacity="0.5"/>
+  </g>
+
+  <!-- Text content -->
+  <g>
+    <!-- Top label -->
+    <text x="60" y="100" fill="#64748b" font-size="11" letter-spacing="4" font-weight="600">REAL-TIME ORBITAL MECHANICS</text>
+
+    <!-- Title -->
+    <text x="60" y="155" fill="#f1f5f9" font-size="42" font-weight="800" letter-spacing="-0.5">Satellite Orbit</text>
+    <text x="60" y="205" fill="#f1f5f9" font-size="42" font-weight="800" letter-spacing="-0.5">Visualizer</text>
+
+    <!-- Tagline -->
+    <text x="60" y="248" fill="#94a3b8" font-size="15" font-weight="400">Real-time 3D tracking and pass prediction</text>
+    <text x="60" y="270" fill="#94a3b8" font-size="15" font-weight="400">for the active satellite catalog</text>
+
+    <!-- Stats row -->
+    <g transform="translate(60, 310)">
+      <rect x="0" y="0" width="110" height="44" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="55" y="18" text-anchor="middle" fill="#60a5fa" font-size="16" font-weight="700">1000+</text>
+      <text x="55" y="34" text-anchor="middle" fill="#64748b" font-size="9" letter-spacing="1">SATELLITES</text>
+
+      <rect x="125" y="0" width="110" height="44" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="180" y="18" text-anchor="middle" fill="#f97316" font-size="16" font-weight="700">SGP4</text>
+      <text x="180" y="34" text-anchor="middle" fill="#64748b" font-size="9" letter-spacing="1">PROPAGATION</text>
+
+      <rect x="250" y="0" width="110" height="44" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+      <text x="305" y="18" text-anchor="middle" fill="#22c55e" font-size="16" font-weight="700">36h</text>
+      <text x="305" y="34" text-anchor="middle" fill="#64748b" font-size="9" letter-spacing="1">PASS WINDOW</text>
+    </g>
+  </g>
+</svg>
